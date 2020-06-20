@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cczu.librarymanagementserver.mapper.ReaderMapper">
+
+ <update id="updatePartial" parameterType="Reader" >
+     update  reader
+     set s_no=#{sNo},s_name=#{sName},sex=#{sex},tel=#{tel},balance=#{balance},status=#{status}
+     where s_id=#{sId};
+ </update>
+</mapper>

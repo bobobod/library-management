@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cczu.librarymanagementserver.mapper.CategoryMapper">
+
+    <select id="select" resultType="Admin">
+         select admin.a_id,admin.a_name,admin.address,admin.a_no,admin.a_password,tel
+         from admin;
+    </select>
+    <resultMap id="BaseResultMap" type="Category">
+        <id property="cId" column="c_id"/>
+        <result column="c_name" property="cName"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="is_parent" property="isParent"/>
+        <collection property="children" ofType="Category"
+                    select="com.cczu.librarymanagementserver.mapper.CategoryMapper.getCatByPid"
+                    column="c_id">
+        </collection>
+    </resultMap>
+    <select id="getCatByPid" resultMap="BaseResultMap"
+            parameterType="Integer">
+        select category.* from category where parent_id = #{pid};
+    </select>
+</mapper>
